@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "allowJs": true, // Cho phép file .js / .jsx
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ], // Dùng @ để đại diện cho thư mục src
+      "assets/*": [
+        "./src/assets/*"
+      ], // Import từ 'assets/...' sẽ trỏ đến ./src/assets/...
+      "components/*": [
+        "./src/components/*"
+      ], // Tương tự cho components
+      "helpers/*": [
+        "./src/helpers/*"
+      ],
+      "pages/*": [
+        "./src/pages/*"
+      ],
+      "styles/*": [
+        "./src/styles/*"
+      ],
+      "routes/*": [
+        "./src/routes/*"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}
