@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký Khối Học - THPT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-3xl"></i>
+                    <h1 class="text-2xl font-bold">HỆ THỐNG ĐĂNG KÝ KHỐI HỌC</h1>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="#" class="hover:text-indigo-200 font-medium">Trang chủ</a></li>
+                        <li><a href="#" class="hover:text-indigo-200 font-medium">Khối học</a></li>
+                        <li><a href="#" class="hover:text-indigo-200 font-medium">Hướng dẫn</a></li>
+                        <li><a href="#" class="hover:text-indigo-200 font-medium">Liên hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button class="hidden md:block bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-indigo-100 transition">Đăng nhập</button>
+                    <button class="md:hidden text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Đăng ký khối học năm học 2023-2024</h1>
+                    <p class="text-xl mb-8 text-indigo-100">Hệ thống đăng ký khối học trực tuyến dành cho học sinh THPT. Đơn giản - Nhanh chóng - Tiện lợi</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-bold hover:bg-indigo-100 transition">Đăng ký ngay</button>
+                        <button class="bg-transparent border-2 border-white px-6 py-3 rounded-lg font-bold hover:bg-white hover:text-indigo-600 transition">Tìm hiểu thêm</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3976/3976626.png" alt="Học sinh" class="w-full max-w-md">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="bg-white py-12 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Thời gian đăng ký còn lại</h2>
+                <p class="text-gray-600">Hạn cuối đăng ký: 30/08/2023</p>
+            </div>
+            <div class="flex justify-center">
+                <div class="grid grid-cols-4 gap-4 max-w-2xl">
+                    <div class="bg-indigo-50 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold text-indigo-600 mb-2" id="days">00</div>
+                        <div class="text-gray-600">Ngày</div>
+                    </div>
+                    <div class="bg-indigo-50 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold text-indigo-600 mb-2" id="hours">00</div>
+                        <div class="text-gray-600">Giờ</div>
+                    </div>
+                    <div class="bg-indigo-50 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold text-indigo-600 mb-2" id="minutes">00</div>
+                        <div class="text-gray-600">Phút</div>
+                    </div>
+                    <div class="bg-indigo-50 rounded-lg p-6 text-center">
+                        <div class="text-4xl font-bold text-indigo-600 mb-2" id="seconds">00</div>
+                        <div class="text-gray-600">Giây</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subject Blocks Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Các khối học phổ biến</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Lựa chọn khối học phù hợp với năng lực và định hướng nghề nghiệp tương lai của bạn</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Khối A -->
+                <div class="subject-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="bg-indigo-600 p-4 text-white">
+                        <h3 class="text-xl font-bold">Khối A</h3>
+                        <p class="text-indigo-100">Toán - Lý - Hóa</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-2 text-gray-700 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Kỹ thuật, Công nghệ</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Kinh tế, Quản trị</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Khoa học tự nhiên</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">Đăng ký</button>
+                    </div>
+                </div>
+                
+                <!-- Khối B -->
+                <div class="subject-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="bg-green-600 p-4 text-white">
+                        <h3 class="text-xl font-bold">Khối B</h3>
+                        <p class="text-green-100">Toán - Hóa - Sinh</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-2 text-gray-700 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Y dược, Sức khỏe</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Nông nghiệp</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Khoa học sự sống</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Đăng ký</button>
+                    </div>
+                </div>
+                
+                <!-- Khối C -->
+                <div class="subject-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="bg-amber-600 p-4 text-white">
+                        <h3 class="text-xl font-bold">Khối C</h3>
+                        <p class="text-amber-100">Văn - Sử - Địa</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-2 text-gray-700 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Báo chí, Truyền thông</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Luật, Nhân văn</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Giáo dục, Xã hội</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700 transition">Đăng ký</button>
+                    </div>
+                </div>
+                
+                <!-- Khối D -->
+                <div class="subject-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="bg-blue-600 p-4 text-white">
+                        <h3 class="text-xl font-bold">Khối D</h3>
+                        <p class="text-blue-100">Toán - Văn - Anh</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-2 text-gray-700 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Ngoại ngữ, Quốc tế</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Kinh tế đối ngoại</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Du lịch, Dịch vụ</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Đăng ký</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border-2 border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg font-bold hover:bg-indigo-600 hover:text-white transition">
+                    Xem tất cả các khối học <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Register Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Các bước đăng ký khối học</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Thực hiện theo 4 bước đơn giản để hoàn tất đăng ký</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto">
+                <!-- Step 1 -->
+                <div class="relative mb-10 md:mb-0">
+                    <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl font-bold">1</div>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-bold text-lg mb-2">Đăng nhập hệ thống</h3>
+                        <p class="text-gray-600">Sử dụng tài khoản được cấp để đăng nhập</p>
+                    </div>
+                    <div class="hidden md:block absolute top-10 left-full w-16 border-t-2 border-dashed border-gray-300"></div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="relative mb-10 md:mb-0">
+                    <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl font-bold">2</div>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-bold text-lg mb-2">Chọn khối học</h3>
+                        <p class="text-gray-600">Lựa chọn khối học phù hợp với năng lực</p>
+                    </div>
+                    <div class="hidden md:block absolute top-10 left-full w-16 border-t-2 border-dashed border-gray-300"></div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="relative mb-10 md:mb-0">
+                    <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl font-bold">3</div>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-bold text-lg mb-2">Xác nhận thông tin</h3>
+                        <p class="text-gray-600">Kiểm tra và xác nhận thông tin đăng ký</p>
+                    </div>
+                    <div class="hidden md:block absolute top-10 left-full w-16 border-t-2 border-dashed border-gray-300"></div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="relative">
+                    <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl font-bold">4</div>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-bold text-lg mb-2">Hoàn tất đăng ký</h3>
+                        <p class="text-gray-600">Nhận email xác nhận đăng ký thành công</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Học sinh nói gì về chúng tôi</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Những phản hồi từ học sinh đã sử dụng hệ thống đăng ký khối học</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold mr-4">NT</div>
+                        <div>
+                            <h4 class="font-bold">Nguyễn Thị Mai</h4>
+                            <p class="text-gray-500 text-sm">Lớp 12A1 - THPT ABC</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Hệ thống đăng ký rất dễ sử dụng, mình chỉ mất 5 phút để hoàn tất thủ tục. Thông tin được cập nhật ngay lập tức và nhận được email xác nhận rất nhanh."</p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold mr-4">TL</div>
+                        <div>
+                            <h4 class="font-bold">Trần Văn Long</h4>
+                            <p class="text-gray-500 text-sm">Lớp 11B3 - THPT XYZ</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Mình rất thích giao diện thân thiện và dễ sử dụng. Hướng dẫn từng bước rất rõ ràng, ngay cả khi không giỏi công nghệ vẫn có thể đăng ký dễ dàng."</p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold mr-4">PH</div>
+                        <div>
+                            <h4 class="font-bold">Phạm Hoàng Hải</h4>
+                            <p class="text-gray-500 text-sm">Lớp 12C2 - THPT DEF</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"So với cách đăng ký truyền thống phải điền giấy tờ thủ công thì hệ thống này tiện lợi hơn rất nhiều. Mình có thể đăng ký mọi lúc mọi nơi chỉ cần có internet."</p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Câu hỏi thường gặp</h2>
+                <p class="text-gray-600">Tìm câu trả lời cho những thắc mắc phổ biến</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="text-lg font-medium text-left">Tôi có thể thay đổi khối học sau khi đã đăng ký không?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 pt-0">
+                        <p class="text-gray-700">Bạn có thể thay đổi khối học trong thời gian mở hệ thống đăng ký. Sau khi đóng hệ thống, mọi thay đổi cần được thực hiện thông qua văn bản đề nghị gửi ban giám hiệu nhà trường.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="text-lg font-medium text-left">Thời gian đăng ký khối học trong bao lâu?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 pt-0">
+                        <p class="text-gray-700">Thông thường, hệ thống mở đăng ký trong vòng 2 tuần từ ngày thông báo. Bạn có thể theo dõi thời gian còn lại trên trang chủ của hệ thống.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="text-lg font-medium text-left">Tôi quên mật khẩu đăng nhập thì phải làm sao?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 pt-0">
+                        <p class="text-gray-700">Bạn có thể nhấn vào liên kết "Quên mật khẩu" trên trang đăng nhập và làm theo hướng dẫn để đặt lại mật khẩu mới. Mật khẩu mới sẽ được gửi đến email đã đăng ký tài khoản.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition">
+                        <span class="text-lg font-medium text-left">Làm sao để biết đăng ký của tôi đã thành công?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 pt-0">
+                        <p class="text-gray-700">Sau khi hoàn tất đăng ký, hệ thống sẽ hiển thị thông báo xác nhận và gửi email xác nhận đến địa chỉ email của bạn. Bạn cũng có thể kiểm tra trạng thái đăng ký trong mục "Lịch sử đăng ký" sau khi đăng nhập.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border-2 border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg font-bold hover:bg-indigo-600 hover:text-white transition">
+                    Xem thêm câu hỏi <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Sẵn sàng đăng ký khối học?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto text-indigo-100">Đăng ký ngay để chọn khối học phù hợp với định hướng tương lai của bạn</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="bg-white text-indigo-600 px-8 py-4 rounded-lg font-bold hover:bg-indigo-100 transition text-lg">Đăng ký ngay</button>
+                <button class="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-indigo-600 transition text-lg">Liên hệ hỗ trợ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1 -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-graduation-cap text-2xl"></i>
+                        <h3 class="text-xl font-bold">ĐĂNG KÝ KHỐI HỌC</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Hệ thống đăng ký khối học trực tuyến dành cho học sinh THPT.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Liên kết nhanh</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Trang chủ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Khối học</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hướng dẫn</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Liên hệ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Khối học</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Khối A (Toán - Lý - Hóa)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Khối B (Toán - Hóa - Sinh)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Khối C (Văn - Sử - Địa)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Khối D (Toán - Văn - Anh)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Khối năng khiếu</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Liên hệ</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-indigo-400"></i>
+                            <span class="text-gray-400">123 Đường ABC, Quận XYZ, TP.HCM</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-indigo-400"></i>
+                            <span class="text-gray-400">(028) 1234 5678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-indigo-400"></i>
+                            <span class="text-gray-400">hotro@dangkykhoihoc.edu.vn</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-indigo-400"></i>
+                            <span class="text-gray-400">Thứ 2 - Thứ 7: 7:30 - 17:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2023 Hệ thống Đăng ký Khối học THPT. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const endDate = new Date("August 30, 2023 23:59:59").getTime();
+            const now = new Date().getTime();
+            const distance = endDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = days.toString().padStart(2, "0");
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, "0");
+            
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }
+        
+        const countdownTimer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // FAQ toggle
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('transform');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Mobile menu toggle (placeholder)
+        document.querySelector('.md\\:hidden.text-2xl').addEventListener('click', () => {
+            alert('Menu di động sẽ mở ở đây');
+        });
+    </script>
+</body>
+</html>
