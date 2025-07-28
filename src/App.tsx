@@ -3,6 +3,7 @@ import Login from 'pages/login/login'
 import ProtectedRoute from 'routes/protectedRoute'
 import Register from '@/pages/register/register'
 import Home from './pages/home/home'
+import Profile from './pages/profile/profile'
 
 function App() {
   return (
@@ -11,24 +12,28 @@ function App() {
         <Route
           path="/login"
           element={
-            <ProtectedRoute>
-              <Login />
-            </ProtectedRoute>
+            <Login />
           }
         />
         <Route
           path="/register"
           element={
-            <ProtectedRoute>
-              <Register />
-            </ProtectedRoute>
+
+            <Register />
           }
         />
         <Route
-          path="/home"
+          path="/"
+          element={
+
+            <Home />
+          }
+        />
+        <Route
+          path="/profile"
           element={
             <ProtectedRoute>
-              <Home />
+              <Profile />
             </ProtectedRoute>
           }
         />

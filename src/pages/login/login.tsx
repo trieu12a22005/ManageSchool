@@ -1,23 +1,62 @@
 import HeaderHome from "@/components/layout/home/headerHome";
 import LayoutHeader from "@/components/layoutheader/layoutHeader";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { FaUser, FaLock } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import { IoMdSchool } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     interface LoginFormData {
         username: string,
         password: string
     }
+    interface LoginResponse {
+        code: number;
+        message: string;
+        username: string;
+        avatar: string;
+    }
     const [formData, setFormData] = useState<LoginFormData>({
         username: "",
         password: ""
     })
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const navigate = useNavigate();
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Dữ liệu form:", formData);
+        const res = await fetch("http://localhost:3055/api/v1/users/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(
+                    {
+                        email: formData.username,
+                        password: formData.password
+                    }
+                )
+            }
+
+        )
+        const data: LoginResponse = await res.json();
+        console.log(res.ok)
+        if (!res.ok) {
+            toast.error(data.message || "Đăng nhập thất bại");
+        }
+        else {
+            toast.success("Đăng nhập thành công!");
+            localStorage.setItem("token", "true");
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("avatar", data.avatar);
+
+            // Chờ 3 giây rồi mới navigate
+            setTimeout(() => {
+                navigate("/");
+            }, 2000);
+        }
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -108,6 +147,7 @@ const Login = () => {
                 <p className="mt- text-xs text-gray-400">
                     © 2023 Hệ thống đăng ký khối học THPT. Bản quyền thuộc về Bộ Giáo dục và Đào tạo.
                 </p>
+                <Toaster position="top-right" />
             </div>
         </>
     );

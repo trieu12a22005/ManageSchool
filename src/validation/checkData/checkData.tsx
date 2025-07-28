@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 
 export interface RegisterFormData {
-    fullname: string;
+    fullName: string;
     email: string;
     birth: string;
     password: string;
@@ -12,7 +12,7 @@ export interface RegisterFormData {
 
 // Hàm trả về true/false để biết có hợp lệ không
 export const CheckData = (formRegister: RegisterFormData): boolean => {
-    if (!formRegister.fullname || !formRegister.email || !formRegister.username) {
+    if (!formRegister.fullName || !formRegister.email || !formRegister.username) {
         toast.error("Vui lòng nhập đầy đủ thông tin bắt buộc!", { position: "top-right" });
         return false;
     }
@@ -32,7 +32,5 @@ export const CheckData = (formRegister: RegisterFormData): boolean => {
         toast.error("Mật khẩu xác nhận không khớp!", { position: "top-right" });
         return false;
     }
-
-    toast.success("Đăng ký thành công!", { position: "top-right" });
     return true;
 };

@@ -7,7 +7,7 @@ interface ProtectedProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedProps> = ({ children }) => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("token");
     const location = useLocation();
 
     if (!accessToken) {

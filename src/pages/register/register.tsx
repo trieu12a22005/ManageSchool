@@ -1,6 +1,7 @@
 import HeaderHome from "@/components/layout/home/headerHome";
 import LayoutHeader from "@/components/layoutheader/layoutHeader";
 import { CheckData } from "@/validation/checkData/checkData";
+import Password from "antd/es/input/Password";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { FaLock, FaUser } from "react-icons/fa";
@@ -9,7 +10,7 @@ import { IoMdSchool } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 
 interface RegisterFormData {
-    fullname: string;
+    fullName: string;
     email: string;
     birth: string;
     password: string;
@@ -20,7 +21,7 @@ interface RegisterFormData {
 
 const Register = () => {
     const [formRegister, setFormRegister] = useState<RegisterFormData>({
-        fullname: "",
+        fullName: "",
         email: "",
         birth: "",
         password: "",
@@ -29,12 +30,48 @@ const Register = () => {
         username: "",
     });
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const isValid = CheckData(formRegister);
-        if (!isValid) return;
-        console.log("Form data:", formRegister);
+
+        // ✅ Gọi hàm CheckData trước khi gửi
+        if (!CheckData(formRegister)) {
+            toast.error("Vui lòng điền đầy đủ thông tin");
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:3055/api/v1/users/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(
+                    {
+                        email: formRegister.email,
+                        username: formRegister.username,
+                        birth: formRegister.birth,
+                        password: formRegister.password,
+                        address: formRegister.address,
+                        fullName: formRegister.fullName
+                    }
+                ), // ✅ Gửi trực tiếp, không bọc {formRegister}
+            });
+
+            const data = await res.json();
+            if (!res.ok) {
+                toast.error(data.message || "Đăng ký thất bại");
+            }
+            else {
+                toast.success("Đăng ký thành công!");
+            }
+        } catch (err) {
+            console.error("Fetch error:", err);
+
+        }
+
     };
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -61,8 +98,8 @@ const Register = () => {
                                 <input
                                     type="text"
                                     placeholder="Nhập họ và tên"
-                                    name="fullname"
-                                    value={formRegister.fullname}
+                                    name="fullName"
+                                    value={formRegister.fullName}
                                     onChange={handleChange}
                                     className="flex-1 px-2 py-2 focus:outline-none"
                                 />
