@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 export interface RegisterFormData {
     fullName: string;
     email: string;
-    birth: string;
+    birthday: string;
     password: string;
     confirm: string;
     address: string;

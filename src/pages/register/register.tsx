@@ -1,5 +1,6 @@
 import HeaderHome from "@/components/layout/home/headerHome";
 import LayoutHeader from "@/components/layoutheader/layoutHeader";
+import { PostApi } from "@/components/method/method";
 import { CheckData } from "@/validation/checkData/checkData";
 import Password from "antd/es/input/Password";
 import { useState } from "react";
@@ -8,11 +9,12 @@ import { FaLock, FaUser } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import { IoMdSchool } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterFormData {
     fullName: string;
     email: string;
-    birth: string;
+    birthday: string;
     password: string;
     confirm: string;
     address: string;
@@ -23,13 +25,13 @@ const Register = () => {
     const [formRegister, setFormRegister] = useState<RegisterFormData>({
         fullName: "",
         email: "",
-        birth: "",
+        birthday: "",
         password: "",
         confirm: "",
         address: "",
         username: "",
     });
-
+    const navigate = useNavigate();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -40,30 +42,24 @@ const Register = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:3055/api/v1/users/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify(
-                    {
-                        email: formRegister.email,
-                        username: formRegister.username,
-                        birth: formRegister.birth,
-                        password: formRegister.password,
-                        address: formRegister.address,
-                        fullName: formRegister.fullName
-                    }
-                ), // ✅ Gửi trực tiếp, không bọc {formRegister}
+            const res = await PostApi("/users/register", {
+
+                email: formRegister.email,
+                username: formRegister.username,
+                birthday: formRegister.birthday,
+                password: formRegister.password,
+                address: formRegister.address,
+                fullName: formRegister.fullName
             });
 
-            const data = await res.json();
-            if (!res.ok) {
+            const data = res.data; // ✅ Lấy data từ PostApi
+            console.log(res.status);
+            if (!res.status) {
                 toast.error(data.message || "Đăng ký thất bại");
             }
             else {
                 toast.success("Đăng ký thành công!");
+                navigate("/login")
             }
         } catch (err) {
             console.error("Fetch error:", err);
@@ -109,8 +105,8 @@ const Register = () => {
                             <label className="text-sm font-medium mb-1">Ngày sinh</label>
                             <input
                                 type="date"
-                                name="birth"
-                                value={formRegister.birth}
+                                name="birthday"
+                                value={formRegister.birthday}
                                 onChange={handleChange}
                                 className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
                             />

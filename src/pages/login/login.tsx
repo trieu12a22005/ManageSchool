@@ -1,5 +1,6 @@
 import HeaderHome from "@/components/layout/home/headerHome";
 import LayoutHeader from "@/components/layoutheader/layoutHeader";
+import { PostApi } from "@/components/method/method";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaUser, FaLock } from "react-icons/fa";
@@ -12,6 +13,8 @@ const Login = () => {
         username: string,
         password: string
     }
+    const baseURL = import.meta.env.VITE_BASE_URL;
+    console.log(baseURL)
     interface LoginResponse {
         code: number;
         message: string;
@@ -25,39 +28,29 @@ const Login = () => {
     const navigate = useNavigate();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const res = await fetch("http://localhost:3055/api/v1/users/login",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify(
-                    {
-                        email: formData.username,
-                        password: formData.password
-                    }
-                )
-            }
 
-        )
-        const data: LoginResponse = await res.json();
-        console.log(res.ok)
-        if (!res.ok) {
+        const res = await PostApi<LoginResponse>("/users/login", {
+            email: formData.username,
+            password: formData.password,
+        });
+
+        const data = res.data; // ✅ Lấy data từ PostApi
+        console.log(res.status);
+
+        if (res.status !== 200) {
             toast.error(data.message || "Đăng nhập thất bại");
-        }
-        else {
+        } else {
             toast.success("Đăng nhập thành công!");
             localStorage.setItem("token", "true");
             localStorage.setItem("username", data.username);
             localStorage.setItem("avatar", data.avatar);
 
-            // Chờ 3 giây rồi mới navigate
             setTimeout(() => {
                 navigate("/");
             }, 2000);
         }
-    }
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({
